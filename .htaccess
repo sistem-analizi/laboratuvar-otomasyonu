@@ -1,7 +1,8 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Eğer dosya/klasör doğrudan public/'in altındaysa, oradan servis et
+    RewriteRule ^deploy-hook\.php$ - [L]
+
     RewriteCond %{REQUEST_URI} !^.*/public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
