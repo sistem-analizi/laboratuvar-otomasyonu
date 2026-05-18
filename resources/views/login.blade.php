@@ -162,7 +162,7 @@
                 <p class="text-muted">Sisteme erişmek için bilgilerinizi girin.</p>
             </div>
 
-            <form action="/giris" method="POST">
+            <form action="{{ url('giris') }}" method="POST">
                 @csrf
 
                 @if(session('hata'))
@@ -196,7 +196,7 @@
                 <button type="submit" class="btn btn-login w-100">Sisteme Giriş Yap</button>
 
                 <p class="text-center mt-4 text-muted small">
-                    Henüz hesabınız yok mu? <a href="/kayit" class="text-decoration-none fw-bold ms-1" style="color: #2563eb;">Hemen Kayıt Ol</a>
+                    Henüz hesabınız yok mu? <a href="{{ url('kayit') }}" class="text-decoration-none fw-bold ms-1" style="color: #2563eb;">Hemen Kayıt Ol</a>
                 </p>
             </form>
         </div>
