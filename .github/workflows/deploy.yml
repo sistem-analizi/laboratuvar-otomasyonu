@@ -1,0 +1,81 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: sistem-analizi/ci/.github/workflows/deploy.yml@v1
+    with:
+      build_type: php
+      year: '2026'
+      php_version: '8.2'
+      node_version: '20'
+
+      build_command: |
+        set -e
+
+        # ─── 1) Production .env'i secret'tan yaz ─────────────────────────
+        if [ -n "${LARAVEL_ENV:-}" ]; then
+          printf '%s' "$LARAVEL_ENV" > .env
+          echo ".env written from LARAVEL_ENV secret"
+        else
+          echo "::error::LARAVEL_ENV secret not set"
+          exit 1
+        fi
+
+        # ─── 2) Frontend asset build (Vite) ─────────────────────────────
+        if [ -f package.json ]; then
+          npm install --no-audit --no-fund
+          npm run build
+        fi
+
+        # ─── 3) SQLite veritabanı dosyasını hazırla (yoksa oluştur) ─────
+        # NOT: clean_slate: false olduğu için zaten varolan SQLite dosyası
+        # sunucuda korunur, build runner'da yeni boş dosya bekleniyor.
+        mkdir -p database
+        [ -f database/database.sqlite ] || touch database/database.sqlite
+
+        # ─── 4) Migration'lar build sırasında ÇALIŞTIRILMAZ ─────────────
+        # Build runner'daki SQLite dosyası deploy edilmeyecek (exclude).
+        # Migration'lar sunucuda manuel veya bir webhook ile çalıştırılmalı.
+        # Eğer her deploy'da migrate istiyorsan aşağıyı aç (DİKKAT: sunucu
+        # tarafındaki DB'yi etkilemez, sadece build runner'daki etkiler):
+        # php artisan migrate --force
+
+        # ─── 5) APP_KEY: .env'de yoksa üret ──────────────────────────────
+        if ! grep -q '^APP_KEY=base64:' .env; then
+          php artisan key:generate --force --no-interaction
+        fi
+
+        # ─── 6) Storage symlink ─────────────────────────────────────────
+        php artisan storage:link --force 2>/dev/null || true
+
+        # ─── 7) Production cache ────────────────────────────────────────
+        php artisan config:cache --no-interaction
+        php artisan route:cache --no-interaction
+        php artisan view:cache --no-interaction
+        php artisan event:cache --no-interaction || true
+
+        # ─── 8) Autoloader optimize ─────────────────────────────────────
+        composer dump-autoload --optimize --no-dev
+
+      clean_slate: false
+
+      forward_secrets: LARAVEL_ENV
+
+      exclude: |
+        database/database.sqlite
+        *.sqlite
+        *.sqlite-journal
+        storage/logs/*.log
+        storage/framework/cache/data
+        storage/framework/sessions
+        storage/framework/views
+        tests
+        phpunit.xml
+        .editorconfig
+
+    secrets: inherit
