@@ -26,56 +26,55 @@ jobs:
           exit 1
         fi
 
-        # ─── 2) Frontend asset build (Vite) ─────────────────────────────
+        # ─── 2) Composer install (vendor/ build runner'da oluşur) ────────
+        composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
+
+        # ─── 3) APP_KEY: .env'de yoksa üret ──────────────────────────────
+        if ! grep -q '^APP_KEY=base64:' .env; then
+          php artisan key:generate --force --no-interaction
+        fi
+
+        # ─── 4) Frontend asset build (Vite) ─────────────────────────────
         if [ -f package.json ]; then
           npm install --no-audit --no-fund
           npm run build
         fi
 
-        # ─── 3) SQLite veritabanı dosyasını hazırla (yoksa oluştur) ─────
-        # NOT: clean_slate: false olduğu için zaten varolan SQLite dosyası
-        # sunucuda korunur, build runner'da yeni boş dosya bekleniyor.
-        mkdir -p database
-        [ -f database/database.sqlite ] || touch database/database.sqlite
+        # ─── 5) Vendor'ı tek zip dosyaya paketle (FTP transfer hızı için) ─
+        # 10.000+ küçük dosya yerine ~30-50 MB tek zip uploadlamak FTP'de
+        # 60+ dk yerine 1-2 dk sürer. Server-side deploy-hook unzip edip
+        # zip'i silecek.
+        echo "Zipping vendor/ ..."
+        zip -qr vendor.zip vendor/
+        ls -lh vendor.zip
 
-        # ─── 4) Migration'lar build sırasında ÇALIŞTIRILMAZ ─────────────
-        # Build runner'daki SQLite dosyası deploy edilmeyecek (exclude).
-        # Migration'lar sunucuda manuel veya bir webhook ile çalıştırılmalı.
-        # Eğer her deploy'da migrate istiyorsan aşağıyı aç (DİKKAT: sunucu
-        # tarafındaki DB'yi etkilemez, sadece build runner'daki etkiler):
-        # php artisan migrate --force
+        # ─── 6) vendor/ klasörünü local'den sil ─────────────────────────
+        # Sadece vendor.zip deploy edilecek. Mirror diff-sync vendor/'ı
+        # remote'ta görmediği için varsa onu da silmez (preserved by exclude).
+        rm -rf vendor/
 
-        # ─── 5) APP_KEY: .env'de yoksa üret ──────────────────────────────
-        if ! grep -q '^APP_KEY=base64:' .env; then
-          php artisan key:generate --force --no-interaction
-        fi
-
-        # ─── 6) Storage symlink ─────────────────────────────────────────
-        php artisan storage:link --force 2>/dev/null || true
-
-        # ─── 7) Production cache ────────────────────────────────────────
-        php artisan config:cache --no-interaction
-        php artisan route:cache --no-interaction
-        php artisan view:cache --no-interaction
-        php artisan event:cache --no-interaction || true
-
-        # ─── 8) Autoloader optimize ─────────────────────────────────────
-        composer dump-autoload --optimize --no-dev
-
-      clean_slate: false
-
-      forward_secrets: LARAVEL_ENV
-
+      # Runtime'da değişmesi gereken dosyalar — server'da preserve edilsin
       exclude: |
+        vendor
         database/database.sqlite
         *.sqlite
         *.sqlite-journal
-        storage/logs/*.log
-        storage/framework/cache/data
+        storage/logs
+        storage/framework/cache
         storage/framework/sessions
         storage/framework/views
+        bootstrap/cache/*.php
         tests
         phpunit.xml
         .editorconfig
+
+      clean_slate: false
+
+      # LARAVEL_ENV: tüm .env içeriği (DEPLOY_HOOK_KEY de içinde olmalı)
+      # DEPLOY_HOOK_KEY: deploy-hook auth için (LARAVEL_ENV'deki ile aynı değer)
+      forward_secrets: LARAVEL_ENV, DEPLOY_HOOK_KEY
+
+      # Deploy bitince hook URL'ini tetikle: vendor.zip'i extract et + artisan komutları
+      post_deploy_hook_url: https://proje.kamilakgun.com.tr/2026/laboratuvar-otomasyonu/deploy-hook.php
 
     secrets: inherit
