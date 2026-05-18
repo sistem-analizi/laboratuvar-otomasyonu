@@ -25,11 +25,9 @@ if (!file_exists($envPath)) {
     die('.env not found');
 }
 
-$env = parse_ini_file($envPath, false, INI_SCANNER_RAW);
-$hookKey = $env['DEPLOY_HOOK_KEY'] ?? '';
-
-// Bazı .env'lerde değer tırnak içinde olabilir
-$hookKey = trim((string)$hookKey, "\"'");
+// Laravel .env formatı PHP'nin parse_ini_file()'ı için tam uyumlu değil
+// (${VAR} interpolation, mixed quotes). Manuel parse ediyoruz.
+$hookKey = read_env_value($envPath, 'DEPLOY_HOOK_KEY');
 
 if (empty($hookKey)) {
     http_response_code(500);
@@ -122,10 +120,37 @@ try {
     exit;
 }
 
-// ────────── 6) Artisan komutları ──────────
+// ────────── 6) Storage symlink — exec() yerine native PHP symlink() ──────
+// Plesk vb. shared hosting'de exec() çoğu zaman disable_functions'da.
+// Laravel'in storage:link komutu bazı codepath'lerde exec'e gidiyor.
+// PHP'nin native symlink()'ini doğrudan çağırarak bunu bypass ediyoruz.
+$storageTarget = __DIR__ . '/storage/app/public';
+$storageLink   = __DIR__ . '/public/storage';
+
+echo "→ storage symlink (native PHP)\n";
+if (!is_dir($storageTarget)) {
+    @mkdir($storageTarget, 0775, true);
+    echo "    created target dir: $storageTarget\n";
+}
+if (is_link($storageLink) || file_exists($storageLink)) {
+    echo "    ✓ already exists, skipping\n";
+} else {
+    if (!function_exists('symlink')) {
+        echo "    ⚠ symlink() function disabled. Storage uploads won't work via public/storage path.\n";
+    } elseif (@symlink($storageTarget, $storageLink)) {
+        echo "    ✓ linked $storageLink → $storageTarget\n";
+    } else {
+        $err = error_get_last();
+        echo "    ⚠ symlink failed: " . ($err['message'] ?? 'unknown') . "\n";
+        echo "      (Hosting might disallow symlinks. Yedek olarak public/storage'i\n";
+        echo "       gerçek bir klasör yapıp Laravel'in storage path'ini değiştir.)\n";
+    }
+}
+echo "\n";
+
+// ────────── 7) Diğer artisan komutları ──────────
 $commands = [
     'migrate'       => ['--force' => true],
-    'storage:link'  => ['--force' => true],
     'config:clear'  => [],
     'route:clear'   => [],
     'view:clear'    => [],
@@ -164,6 +189,52 @@ if (!$allOk) {
 }
 
 // ────────── Helpers ──────────
+
+/**
+ * Laravel .env formatından tek bir değer oku.
+ * parse_ini_file()'a benzer ama daha esnek: ${VAR} interpolation'ları,
+ * tek/çift tırnak karışımı, yorum satırları gibi durumları handle eder.
+ */
+function read_env_value(string $path, string $key): ?string
+{
+    if (!is_file($path)) {
+        return null;
+    }
+    $lines = file($path, FILE_IGNORE_NEW_LINES) ?: [];
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '' || $line[0] === '#') {
+            continue;
+        }
+        $eqPos = strpos($line, '=');
+        if ($eqPos === false) {
+            continue;
+        }
+        $k = trim(substr($line, 0, $eqPos));
+        if ($k !== $key) {
+            continue;
+        }
+        $v = trim(substr($line, $eqPos + 1));
+        // Sondaki inline yorumu kes (sadece tırnak dışındaysa)
+        if ($v !== '' && $v[0] !== '"' && $v[0] !== "'") {
+            $hashPos = strpos($v, ' #');
+            if ($hashPos !== false) {
+                $v = trim(substr($v, 0, $hashPos));
+            }
+        }
+        // Çevreleyen tırnakları sıyır
+        $len = strlen($v);
+        if ($len >= 2 && (
+            ($v[0] === '"' && $v[$len - 1] === '"') ||
+            ($v[0] === "'" && $v[$len - 1] === "'")
+        )) {
+            $v = substr($v, 1, -1);
+        }
+        return $v;
+    }
+    return null;
+}
+
 function rrmdir(string $dir): void
 {
     if (!is_dir($dir)) {
