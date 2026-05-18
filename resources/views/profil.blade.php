@@ -51,7 +51,7 @@
                                 @if($rol_id == 1)
                                     <span class="badge bg-info text-dark rounded-pill px-3">Öğrenci</span>
                                 @elseif($rol_id == 2)
-                                    <span class="badge bg-primary rounded-pill px-3">Labaratuvar Sorumlusu</span>
+                                    <span class="badge bg-primary rounded-pill px-3">Laboratuvar Sorumlusu</span>
                                 @else
                                     <span class="badge bg-secondary rounded-pill px-3">Personel</span>
                                 @endif
