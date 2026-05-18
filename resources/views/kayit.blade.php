@@ -23,7 +23,7 @@
         <div class="col-md-7 p-5">
             <h4 class="fw-bold text-dark mb-4">Yeni Kayıt Oluştur</h4>
 
-            <form action="{{ url('kayit') }}" method="POST">
+            <form action="/2026/laboratuvar-otomasyonu/kayit" method="POST">
                 @csrf
 
                 @if(session('hata'))
@@ -59,7 +59,7 @@
 
                 <button type="submit" class="btn btn-primary w-100 mb-3">Kayıt Ol</button>
                 <div class="text-center">
-                    <a href="{{ url('giris') }}" class="small text-decoration-none">Zaten hesabın var mı? Giriş Yap</a>
+                    <a href="/2026/laboratuvar-otomasyonu/giris" class="small text-decoration-none">Zaten hesabın var mı? Giriş Yap</a>
                 </div>
             </form>
         </div>
