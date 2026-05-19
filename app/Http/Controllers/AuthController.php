@@ -34,7 +34,7 @@ class AuthController extends Controller
 
             // DİKKAT: 1 numara Öğrenci ise direkt profile, değilse (2 veya 3 ise) ana sayfaya (Kataloğa) git
             if ($kullanici->rol_id == 1) {
-                return redirect('/profil');
+                return redirect('profil');
             } else {
                 return redirect('/');
             }
@@ -64,12 +64,12 @@ class AuthController extends Controller
             'sifre' => $request->sifre,
             'rol_id' => 1
         ]);
-        return redirect('/');
+        return redirect('giris');
     }
 
     // Çıkış Yap
     public function cikis() {
         session()->flush();
-        return redirect('/giris');
+        return redirect('giris');
     }
 }

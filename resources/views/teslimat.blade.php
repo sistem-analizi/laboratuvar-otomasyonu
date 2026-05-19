@@ -25,7 +25,7 @@
                     <tbody>
                     @forelse($talepler as $talep)
                         <tr>
-                            <form action="/teslimat" method="POST">
+                            <form action="{{ url('teslimat') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="talep_id" value="{{ $talep->talep_id }}">
                                 <input type="hidden" name="kullanici_id" value="{{ $talep->kullanici_id }}">

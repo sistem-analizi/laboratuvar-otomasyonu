@@ -85,7 +85,7 @@
                 </div>
             @endif
 
-            <form action="/stok-giris" method="POST" novalidate>
+            <form action="{{ url('stok-giris') }}" method="POST" novalidate>
                 @csrf
 
                 <div class="mb-4">
@@ -157,7 +157,7 @@
                 </div>
 
                 <div class="text-end pt-4 border-top border-light-subtle">
-                    <a href="/" class="btn btn-light px-4 me-3 border fw-bold text-secondary rounded-3 py-2">Vazgeç</a>
+                    <a href="{{ url('/') }}" class="btn btn-light px-4 me-3 border fw-bold text-secondary rounded-3 py-2">Vazgeç</a>
                     <button type="submit" class="btn btn-primary btn-rich px-5 fw-bold py-2 rounded-3 text-white">
                         <i class="fa-solid fa-truck-ramp-box me-2"></i>Stoklara Ekle
                     </button>

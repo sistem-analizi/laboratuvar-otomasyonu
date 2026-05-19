@@ -90,7 +90,7 @@
                 </div>
             @endif
 
-            <form action="/urun-tanit" method="POST" enctype="multipart/form-data" novalidate>
+            <form action="{{ url('urun-tanit') }}" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
 
                 <div class="mb-4">
@@ -158,7 +158,7 @@
                 </div>
 
                 <div class="text-end pt-3 border-top">
-                    <a href="/" class="btn btn-light px-4 me-3 border fw-bold text-secondary">İptal Et</a>
+                    <a href="{{ url('/') }}" class="btn btn-light px-4 me-3 border fw-bold text-secondary">İptal Et</a>
                     <button type="submit" class="btn btn-primary btn-rich px-5 fw-bold py-2"><i class="fa-solid fa-save me-2"></i>Donanımı Kaydet</button>
                 </div>
             </form>

@@ -104,7 +104,7 @@
             border-radius: 8px;
             padding: 10px 15px;
             font-weight: 500;
-            color: #475569;
+            color: #eae1e1;
             transition: all 0.2s ease;
         }
 
@@ -196,7 +196,7 @@
     <nav class="navbar navbar-expand-xxl lab-navbar sticky-top" data-bs-theme="dark">
         <div class="container-fluid px-3 px-xl-4">
 
-            <a class="navbar-brand text-white d-flex align-items-center gap-3" href="/">
+            <a class="navbar-brand text-white d-flex align-items-center gap-3" href="{{ url('/') }}">
                 <div
                     class="brand-icon bg-primary text-white rounded-3 d-flex align-items-center justify-content-center shadow-sm">
                     <i class="fa-solid fa-microscope fa-lg"></i>
@@ -223,34 +223,34 @@
                     @if(session('rol_id') == 2)
                         <li class="nav-item"><a
                                 class="nav-link lab-nav-link {{ request()->is('urun-tanit*') ? 'active' : '' }}"
-                                href="/urun-tanit"><i class="fa-solid fa-plus-circle"></i> Yeni Cihaz</a></li>
+                                href="{{ url('urun-tanit') }}"><i class="fa-solid fa-plus-circle"></i> Yeni Cihaz</a></li>
                         <li class="nav-item"><a
                                 class="nav-link lab-nav-link {{ request()->is('stok-giris*') ? 'active' : '' }}"
-                                href="/stok-giris"><i class="fa-solid fa-boxes-stacked"></i> Stok Girişi</a></li>
+                                href="{{ url('stok-giris') }}"><i class="fa-solid fa-boxes-stacked"></i> Stok Girişi</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link lab-nav-link dropdown-toggle {{ request()->is('odunc-ver*') || request()->is('kalici-zimmet-ver*') ? 'active' : '' }}"
                                href="#" data-bs-toggle="dropdown">
                                 <i class="fa-solid fa-handshake"></i> Zimmet İşlemleri
                             </a>
                             <ul class="dropdown-menu lab-dropdown-menu">
-                                <li><a class="dropdown-item lab-dropdown-item" href="/odunc-ver"><i
+                                <li><a class="dropdown-item lab-dropdown-item" href="{{ url('odunc-ver') }}"><i
                                             class="fa-solid fa-clock-rotate-left me-2"></i> Süreli Ödünç</a></li>
-                                <li><a class="dropdown-item lab-dropdown-item" href="/kalici-zimmet-ver"><i
+                                <li><a class="dropdown-item lab-dropdown-item" href="{{ url('kalici-zimmet-ver') }}"><i
                                             class="fa-solid fa-shield-halved me-2"></i> Kalıcı Zimmetler</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link lab-nav-link {{ request()->is('geciken-teslimatlar*') ? 'active' : '' }}"
-                               href="/geciken-teslimatlar">
+                               href="{{ url('geciken-teslimatlar') }}">
                                 <i class="fa-solid fa-circle-exclamation"></i> Geciken Teslimatlar
                             </a>
                         </li>
                         <li class="nav-item"><a
                                 class="nav-link lab-nav-link {{ request()->is('kullanicilar*') ? 'active' : '' }}"
-                                href="/kullanicilar"><i class="fa-solid fa-users"></i> Kullanıcılar</a></li>
+                                href="{{ url('kullanicilar') }}"><i class="fa-solid fa-users"></i> Kullanıcılar</a></li>
                         <li class="nav-item"><a
                                 class="nav-link lab-nav-link {{ request()->is('ayarlar*') ? 'active' : '' }}"
-                                href="/ayarlar"><i class="fa-solid fa-gear"></i> Sistem Ayarları</a></li>
+                                href="{{ url('ayarlar') }}"><i class="fa-solid fa-gear"></i> Sistem Ayarları</a></li>
                     @endif
                 </ul>
 
@@ -273,12 +273,12 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end lab-dropdown-menu shadow-lg"
                             style="min-width: 200px;">
-                            <li><a class="dropdown-item lab-dropdown-item" href="/profil"><i
+                            <li><a class="dropdown-item lab-dropdown-item" href="{{ url('profil') }}"><i
                                         class="fa-regular fa-user me-2"></i> Profilim</a></li>
                             <li>
                                 <hr class="dropdown-divider opacity-25">
                             </li>
-                            <li><a class="dropdown-item lab-dropdown-item text-danger fw-bold" href="/cikis"><i
+                            <li><a class="dropdown-item lab-dropdown-item text-danger fw-bold" href="{{ url('cikis') }}"><i
                                         class="fa-solid fa-power-off me-2"></i> Çıkış Yap</a></li>
                         </ul>
                     </div>

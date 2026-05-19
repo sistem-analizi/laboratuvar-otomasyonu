@@ -106,8 +106,8 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-md-4 form-side p-4">
-                                <p class="text-muted small mb-4">Sisteme yeni bir üst kategori ekleyin.</p>
-                                <form action="/ayarlar/kategori-ekle" method="POST">
+                                <p class="text-white-50 small mb-4">Sisteme yeni bir üst kategori ekleyin.</p>
+                                <form action="{{ url('ayarlar/kategori-ekle') }}" method="POST">
                                     @csrf
                                     <div class="mb-4">
                                         <label class="form-label text-white-50 small fw-bold">KATEGORİ ADI</label>
@@ -134,7 +134,7 @@
                                                             data-bs-target="#anaKatDuzenleModal" title="Düzenle"><i
                                                             class="fa-solid fa-pen-to-square"></i></button>
 
-                                                    <form action="/ayarlar/ana-kategori-sil/{{ $ana->kategori_id }}"
+                                                    <form action="{{ url('ayarlar/ana-kategori-sil/' . $ana->kategori_id) }}"
                                                           method="POST" class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
                                                         <button type="button"
@@ -170,7 +170,7 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-md-4 form-side p-4">
-                                <form action="/ayarlar/alt-kategori-ekle" method="POST">
+                                <form action="{{ url('ayarlar/alt-kategori-ekle') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label text-white-50 small fw-bold">BAĞLI OLDUĞU ANA
@@ -214,7 +214,7 @@
                                                             data-bs-toggle="modal" data-bs-target="#altKatDuzenleModal"
                                                             title="Düzenle"><i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
-                                                    <form action="/ayarlar/alt-kategori-sil/{{ $alt->alt_kategori_id }}"
+                                                    <form action="{{ url('ayarlar/alt-kategori-sil/' . $alt->alt_kategori_id) }}"
                                                           method="POST" class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
                                                         <button type="button"
@@ -246,9 +246,9 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-md-4 form-side p-4">
-                                <p class="text-muted small mb-4">Cihazların fiziksel olarak bulunacağı laboratuvar
+                                <p class="text-white-50 small mb-4">Cihazların fiziksel olarak bulunacağı laboratuvar
                                     konumlarını tanımlayın.</p>
-                                <form action="/ayarlar/konum-ekle" method="POST">
+                                <form action="{{ url('ayarlar/konum-ekle') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label text-white-50 small fw-bold">DOLAP / ALAN ADI</label>
@@ -289,7 +289,7 @@
                                                             data-raf="{{ $konum->raf_numarasi }}" data-bs-toggle="modal"
                                                             data-bs-target="#konumDuzenleModal" title="Düzenle"><i
                                                             class="fa-solid fa-pen-to-square"></i></button>
-                                                    <form action="/ayarlar/konum-sil/{{ $konum->konum_id }}"
+                                                    <form action="{{ url('ayarlar/konum-sil/' . $konum->konum_id) }}"
                                                           method="POST" class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
                                                         <button type="button"
@@ -316,7 +316,7 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-md-4 form-side p-4">
-                                <form action="/ayarlar/tedarik-tip-ekle" method="POST">
+                                <form action="{{ url('ayarlar/tedarik-tip-ekle') }}" method="POST">
                                     @csrf
                                     <div class="mb-4">
                                         <label class="form-label text-white-50 small fw-bold">KAYNAK TİPİ ADI</label>
@@ -342,7 +342,7 @@
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#tedarikTipDuzenleModal" title="Düzenle"><i
                                                             class="fa-solid fa-pen-to-square"></i></button>
-                                                    <form action="/ayarlar/tedarik-tip-sil/{{ $tip->id }}" method="POST"
+                                                    <form action="{{ url('ayarlar/tedarik-tip-sil/' . $tip->id) }}" method="POST"
                                                           class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
                                                         <button type="button"
@@ -377,7 +377,7 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-md-5 form-side p-4">
-                                <form action="/ayarlar/tedarikci-ekle" method="POST">
+                                <form action="{{ url('ayarlar/tedarikci-ekle') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label text-white-50 small fw-bold">KURUM / KAYNAK ADI</label>
@@ -435,7 +435,7 @@
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                     <!-- SİL FORMU -->
-                                                    <form action="/ayarlar/tedarikci-sil/{{ $kaynak->tedarik_id }}"
+                                                    <form action="{{ url('ayarlar/tedarikci-sil/'. $kaynak->tedarik_id) }}"
                                                           method="POST" class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
                                                         <button type="button"
@@ -473,7 +473,7 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-md-4 form-side p-4">
-                                <form action="/ayarlar/tip-ekle" method="POST">
+                                <form action={{ url('ayarlar/tip-ekle')}} method="POST">
                                     @csrf
                                     <div class="mb-4">
                                         <label class="form-label text-white-50 small fw-bold">ÜRÜN TİPİ ADI</label>
@@ -494,7 +494,7 @@
                                                 <td class="ps-4 align-middle fw-medium">{{ $t->tip_adi ?? 'Belirsiz' }}</td>
                                                 <td class="text-end pe-4 align-middle" style="width: 80px;">
                                                     <button type="button" class="btn btn-sm btn-icon-warning me-1 urun-tip-duzenle-btn" data-id="{{ $t->tip_id }}" data-ad="{{ $t->tip_adi }}" data-bs-toggle="modal" data-bs-target="#urunTipDuzenleModal" title="Düzenle"><i class="fa-solid fa-pen-to-square"></i></button>
-                                                    <form action="/ayarlar/tip-sil/{{ $t->tip_id ?? $t->id }}"
+                                                    <form action="{{ url('ayarlar/tip-sil/'. $t->tip_id ?? $t->id) }}"
                                                           method="POST" class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
                                                         <button type="button"
@@ -526,7 +526,7 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-md-4 form-side p-4">
-                                <form action="/ayarlar/fatura-ekle" method="POST">
+                                <form action={{ url('ayarlar/fatura-ekle')}} method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label text-white-50 small fw-bold">BÜTÇE / DESTEKLEYEN KAYNAK
@@ -606,7 +606,7 @@
                                                             title="Düzenle">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
-                                                    <form action="/ayarlar/fatura-sil/{{ $fatura->fatura_id }}"
+                                                    <form action="{{ url('ayarlar/fatura-sil/' . $fatura->fatura_id) }}"
                                                           method="POST" class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
                                                         <button type="button"
@@ -642,7 +642,7 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-md-4 form-side p-4">
-                                <form action="/ayarlar/marka-ekle" method="POST">
+                                <form action="{{ url('ayarlar/marka-ekle') }}" method="POST">
                                     @csrf
                                     <div class="mb-4">
                                         <label class="form-label text-white-50 small fw-bold">MARKA ADI</label>
@@ -664,7 +664,7 @@
                                                             data-bs-toggle="modal" data-bs-target="#markaDuzenleModal" title="Düzenle">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
-                                                    <form action="/ayarlar/marka-sil/{{ $marka->marka_id }}" method="POST" class="d-inline sil-formu">
+                                                    <form action="{{ url('ayarlar/marka-sil/' . $marka->marka_id) }}" method="POST" class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
                                                         <button type="button" class="btn btn-sm btn-icon-danger sil-butonu" title="Sil"><i class="fa-solid fa-trash"></i></button>
                                                     </form>

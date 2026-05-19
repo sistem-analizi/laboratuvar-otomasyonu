@@ -30,7 +30,7 @@
                             <h4 class="mb-0 text-white fw-bold"><i class="fa-solid fa-clock-rotate-left me-2 opacity-75"></i> Süreli Ödünç İşlemi</h4>
                         </div>
                         <div class="card-body p-4 p-md-5">
-                            <form action="/odunc-kaydet" method="POST" id="oduncForm">
+                            <form action="{{ url('odunc-kaydet') }}" method="POST" id="oduncForm">
                                 @csrf
 
                                 <!-- ALICI BİLGİLERİ -->

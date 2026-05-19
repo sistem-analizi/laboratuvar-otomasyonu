@@ -11,14 +11,14 @@
                             <h4 class="mb-0 text-white fw-bold">Profil Bilgilerini Düzenle</h4>
                             <p class="mb-0 text-info small">Lütfen güncellemek istediğiniz bilgileri girin.</p>
                         </div>
-                        <a href="/profil" class="btn btn-outline-light btn-sm rounded-pill ms-auto">
+                        <a href="{{ url('profil') }}" class="btn btn-outline-light btn-sm rounded-pill ms-auto">
                             <i class="fa-solid fa-arrow-left me-1"></i> Geri Dön
                         </a>
                     </div>
                 </div>
 
                 <div class="card-body p-4 p-md-5 bg-white">
-                    <form action="/profil/guncelle" method="POST">
+                    <form action="{{ url('profil/guncelle') }}" method="POST">
                         @csrf
 
                         <div class="row g-4 mb-4">

@@ -28,7 +28,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
                 @foreach($urunler as $urun)
                     <div class="col">
-                        <a href="/urun/{{ $urun->urun_id }}" class="text-decoration-none">
+                        <a href="{{ url('urun/' . $urun->urun_id) }}" class="text-decoration-none">
                             <div class="product-card">
                                 <div class="card-img-wrapper">
                                     @if(isset($urun->resim_yolu) && $urun->resim_yolu)

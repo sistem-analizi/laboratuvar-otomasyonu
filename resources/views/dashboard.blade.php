@@ -65,7 +65,7 @@
     <div class="container-fluid px-4 pb-5">
 
         <div class="filter-panel mt-3">
-            <form action="/" method="GET" class="row g-2 align-items-end">
+            <form action="{{ url('/') }}" method="GET" class="row g-2 align-items-end">
 
                 <div class="col-lg-3 col-md-6">
                     <label class="form-label fw-semibold text-secondary small mb-1">Kelime, Kod veya Marka</label>
@@ -114,7 +114,7 @@
                 <div class="col-lg-2 col-md-4 d-flex gap-2">
                     <button type="submit" class="btn btn-primary w-100 fw-bold"><i class="fa-solid fa-filter me-1"></i> Filtrele</button>
                     @if(request()->anyFilled(['arama', 'ana_kategori', 'alt_kategori_id', 'tip']))
-                        <a href="/" class="btn btn-light border text-danger px-3 shadow-sm" title="Filtreyi Temizle"><i class="fa-solid fa-xmark"></i></a>
+                        <a href="{{ url('/') }}" class="btn btn-light border text-danger px-3 shadow-sm" title="Filtreyi Temizle"><i class="fa-solid fa-xmark"></i></a>
                     @endif
                 </div>
 
@@ -157,10 +157,10 @@
 
                                         @if(session('rol_id') == 2)
                                         <div class="d-flex gap-1 mt-1">
-                                            <a href="/urun/{{ $urun->urun_id }}" class="btn btn-sm btn-primary flex-grow-1 fw-bold" style="font-size: 0.8rem;"><i class="fa-solid fa-eye me-1"></i>Detay</a>
-                                            <a href="/urun-duzenle/{{ $urun->urun_id }}" class="btn btn-sm btn-warning text-dark px-2 shadow-sm" title="Düzenle"><i class="fa-solid fa-pen"></i></a>
+                                            <a href="{{ url('urun/' . $urun->urun_id) }}" class="btn btn-sm btn-primary flex-grow-1 fw-bold" style="font-size: 0.8rem;"><i class="fa-solid fa-eye me-1"></i>Detay</a>
+                                            <a href="{{ url('urun-duzenle/' . $urun->urun_id) }}" class="btn btn-sm btn-warning text-dark px-2 shadow-sm" title="Düzenle"><i class="fa-solid fa-pen"></i></a>
 
-                                            <form action="/urun-sil/{{ $urun->urun_id }}" method="POST" class="d-inline sil-formu m-0 p-0">
+                                            <form action="{{ url('urun-sil/' . $urun->urun_id) }}" method="POST" class="d-inline sil-formu m-0 p-0">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="btn btn-sm btn-danger px-2 shadow-sm sil-butonu" title="Sil">

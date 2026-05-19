@@ -15,13 +15,17 @@
         .ozel-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
         /* Arama Kutusu İkon Hizalaması */
-        .arama-kapsayici { position: relative; }
+        .arama-kapsayici {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
         .arama-kapsayici i {
-            position: absolute; top: 50%; left: 15px; transform: translateY(-50%); color: #94a3b8;
+            position: absolute; left: 15px; color: #94a3b8; pointer-events: none;
         }
         .arama-input {
-            padding-left: 40px !important; border-radius: 20px !important;
-            border: 1px solid #e2e8f0; background-color: #f8fafc;
+            padding-left: 36px !important; border-radius: 20px !important;
+            border: 1px solid #e2e8f0; background-color: #f8fafc; width: 100%;
         }
         .arama-input:focus {
             background-color: #fff; box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25);
@@ -62,7 +66,7 @@
                         </div>
                     </div>
                     <div>
-                        <a href="/profil/duzenle" class="btn btn-dark rounded-pill px-4"><i class="fa-solid fa-pen me-2"></i>Düzenle</a>
+                        <a href="{{ url('profil/duzenle') }}" class="btn btn-dark rounded-pill px-4"><i class="fa-solid fa-pen me-2"></i>Düzenle</a>
                     </div>
                 </div>
             </div>
@@ -97,11 +101,15 @@
                                     <h6 class="fw-bold text-danger mb-1"><i class="fa-solid fa-laptop-code me-2"></i> Kalıcı Zimmetlerim</h6>
                                     <small class="text-muted" style="font-size: 0.8rem;">Üzerinize kayıtlı laboratuvar demirbaşları.</small>
                                 </div>
-                                <div class="d-flex flex-wrap gap-2 flex-grow-1 justify-content-end">
-                                    <input type="date" id="tarih_demirbas" class="form-control form-control-sm shadow-sm tarih-input" style="max-width: 190px;" title="Tarihe Göre Filtrele">
-                                    <div class="arama-kapsayici flex-grow-1" style="max-width: 200px;">
+                                <div class="d-flex flex-nowrap align-items-center gap-2">
+                                    <div class="d-flex align-items-center bg-light rounded-pill px-2 py-1 border shadow-sm">
+                                        <input type="date" id="tarih_bas_demirbas" class="form-control form-control-sm border-0 bg-transparent text-muted px-1" style="max-width: 110px;" title="Başlangıç Tarihi">
+                                        <span class="text-muted fw-bold mx-1">-</span>
+                                        <input type="date" id="tarih_bit_demirbas" class="form-control form-control-sm border-0 bg-transparent text-muted px-1" style="max-width: 110px;" title="Bitiş Tarihi">
+                                    </div>
+                                    <div class="arama-kapsayici" style="min-width: 150px; max-width: 180px;">
                                         <i class="fa-solid fa-search"></i>
-                                        <input type="text" class="form-control form-control-sm arama-input" id="arama_demirbas" placeholder="Kelime ara...">
+                                        <input type="text" class="form-control form-control-sm arama-input" id="arama_demirbas" placeholder="Ara...">
                                     </div>
                                 </div>
                             </div>
@@ -127,11 +135,9 @@
                                             <tr class="border-bottom cihaz-satiri">
                                                 <td class="py-3">
                                                     <div class="fw-bold text-dark" style="font-size: 0.95rem;">{{ $urun_adi }}</div>
-
                                                     <small class="text-muted" style="font-size: 0.8rem;">
                                                         <i class="fa-solid fa-hashtag opacity-50 text-primary me-1"></i>{{ $cihazlar->first()->urun_kodu ?? $cihazlar->first()->urun_id ?? '-' }}
                                                     </small>
-
                                                     <div class="d-none">@foreach($cihazlar as $c) {{ $c->seri_no }} @endforeach</div>
                                                 </td>
                                                 <td>
@@ -182,11 +188,15 @@
                                     <h6 class="fw-bold text-danger mb-1"><i class="fa-solid fa-laptop-code me-2"></i> Üzerindeki Cihazlar</h6>
                                     <small class="text-muted" style="font-size: 0.8rem;">Şu an sizde olan ödünç cihazlar.</small>
                                 </div>
-                                <div class="d-flex flex-wrap gap-2 flex-grow-1 justify-content-end">
-                                    <input type="date" id="tarih_demirbas" class="form-control form-control-sm shadow-sm tarih-input" style="max-width: 190px;" title="Tarihe Göre Filtrele">
-                                    <div class="arama-kapsayici flex-grow-1" style="max-width: 200px;">
+                                <div class="d-flex flex-nowrap align-items-center gap-2">
+                                    <div class="d-flex align-items-center bg-light rounded-pill px-2 py-1 border shadow-sm">
+                                        <input type="date" id="tarih_bas_demirbas" class="form-control form-control-sm border-0 bg-transparent text-muted px-1" style="max-width: 110px;" title="Başlangıç Tarihi">
+                                        <span class="text-muted fw-bold mx-1">-</span>
+                                        <input type="date" id="tarih_bit_demirbas" class="form-control form-control-sm border-0 bg-transparent text-muted px-1" style="max-width: 110px;" title="Bitiş Tarihi">
+                                    </div>
+                                    <div class="arama-kapsayici" style="min-width: 150px; max-width: 180px;">
                                         <i class="fa-solid fa-search"></i>
-                                        <input type="text" class="form-control form-control-sm arama-input" id="arama_demirbas" placeholder="Kelime ara...">
+                                        <input type="text" class="form-control form-control-sm arama-input" id="arama_demirbas" placeholder="Ara...">
                                     </div>
                                 </div>
                             </div>
@@ -240,13 +250,17 @@
                             <div class="card-header bg-white border-0 p-4 pb-2 d-flex flex-wrap justify-content-between align-items-center gap-3">
                                 <div>
                                     <h6 class="fw-bold text-success mb-1"><i class="fa-solid fa-clock-rotate-left me-2"></i> İade Geçmişi</h6>
-                                    <small class="text-muted" style="font-size: 0.8rem;">Daha önce alıp teslim ettiğiniz cihazlar.</small>
+                                    <small class="text-muted" style="font-size: 0.8rem;">Teslim ettiğiniz cihazlar.</small>
                                 </div>
-                                <div class="d-flex flex-wrap gap-2 flex-grow-1 justify-content-end">
-                                    <input type="date" id="tarih_gecmis" class="form-control form-control-sm shadow-sm tarih-input" style="max-width: 190px;" title="Tarihe Göre Filtrele">
-                                    <div class="arama-kapsayici flex-grow-1" style="max-width: 160px;">
+                                <div class="d-flex flex-nowrap align-items-center gap-2">
+                                    <div class="d-flex align-items-center bg-light rounded-pill px-1 py-1 border shadow-sm">
+                                        <input type="date" id="tarih_bas_gecmis" class="form-control form-control-sm border-0 bg-transparent text-muted px-1" style="max-width: 105px;" title="Başlangıç Tarihi">
+                                        <span class="text-muted fw-bold mx-1">-</span>
+                                        <input type="date" id="tarih_bit_gecmis" class="form-control form-control-sm border-0 bg-transparent text-muted px-1" style="max-width: 105px;" title="Bitiş Tarihi">
+                                    </div>
+                                    <div class="arama-kapsayici" style="min-width: 120px; max-width: 140px;">
                                         <i class="fa-solid fa-search"></i>
-                                        <input type="text" class="form-control form-control-sm arama-input" id="gecmisArama" placeholder="Kelime ara...">
+                                        <input type="text" class="form-control form-control-sm arama-input" id="gecmisArama" placeholder="Ara...">
                                     </div>
                                 </div>
                             </div>
@@ -274,7 +288,9 @@
                     </div>
                 @endif
 
-            </div> @if($rol_id != 2)
+            </div>
+
+            @if($rol_id != 2)
                 <div class="card border-0 shadow-sm mb-4" style="border-top: 4px solid #ffc107; border-radius: 12px;">
                     <div class="card-header bg-white border-0 p-4 pb-2 d-flex flex-wrap justify-content-between align-items-center gap-3">
                         <div class="d-flex align-items-center gap-3">
@@ -283,11 +299,15 @@
                             </div>
                             <span class="badge bg-warning text-dark rounded-pill shadow-sm">Toplam: {{ $sarf_gecmisi->count() }} İşlem</span>
                         </div>
-                        <div class="d-flex flex-wrap gap-2 flex-grow-1 justify-content-end">
-                            <input type="date" id="tarih_sarf" class="form-control form-control-sm shadow-sm tarih-input" style="max-width: 190px;" title="Tarih Filtrele">
-                            <div class="arama-kapsayici flex-grow-1" style="max-width: 250px;">
+                        <div class="d-flex flex-nowrap align-items-center gap-2">
+                            <div class="d-flex align-items-center bg-light rounded-pill px-2 py-1 border shadow-sm">
+                                <input type="date" id="tarih_bas_sarf" class="form-control form-control-sm border-0 bg-transparent text-muted px-1" style="max-width: 110px;" title="Başlangıç Tarihi">
+                                <span class="text-muted fw-bold mx-1">-</span>
+                                <input type="date" id="tarih_bit_sarf" class="form-control form-control-sm border-0 bg-transparent text-muted px-1" style="max-width: 110px;" title="Bitiş Tarihi">
+                            </div>
+                            <div class="arama-kapsayici" style="min-width: 150px; max-width: 180px;">
                                 <i class="fa-solid fa-search"></i>
-                                <input type="text" class="form-control form-control-sm arama-input" id="sarfArama" placeholder="Malzeme veya açıklama ara...">
+                                <input type="text" class="form-control form-control-sm arama-input" id="sarfArama" placeholder="Ara...">
                             </div>
                         </div>
                     </div>
@@ -326,32 +346,52 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            function birlesikFiltrele(textInputId, dateInputId, satirSinifi) {
+            function aralikliFiltrele(textInputId, dateBasId, dateBitId, satirSinifi) {
                 const aramaKutusu = document.getElementById(textInputId);
-                const tarihKutusu = document.getElementById(dateInputId);
+                const basKutusu = document.getElementById(dateBasId);
+                const bitKutusu = document.getElementById(dateBitId);
 
                 function filtreyiUygula() {
                     let metinFiltresi = aramaKutusu ? aramaKutusu.value.toLocaleLowerCase('tr-TR') : '';
 
-                    let tarihFiltresi = '';
-                    if (tarihKutusu && tarihKutusu.value) {
-                        let parcalar = tarihKutusu.value.split('-');
-                        if(parcalar.length === 3) {
-                            tarihFiltresi = parcalar[2] + '.' + parcalar[1] + '.' + parcalar[0];
-                        }
-                    }
+                    let basTarih = basKutusu && basKutusu.value ? new Date(basKutusu.value) : null;
+                    if(basTarih) basTarih.setHours(0,0,0,0);
+
+                    let bitTarih = bitKutusu && bitKutusu.value ? new Date(bitKutusu.value) : null;
+                    if(bitTarih) bitTarih.setHours(23,59,59,999);
 
                     let satirlar = document.querySelectorAll(satirSinifi);
+                    const tarihRegex = /(\d{2})\.(\d{2})\.(\d{4})/g;
 
                     satirlar.forEach(function(satir) {
                         let geciciKlon = satir.cloneNode(true);
                         geciciKlon.querySelectorAll('.badge, .btn').forEach(el => el.remove());
 
                         let temizIcerik = geciciKlon.innerText.toLocaleLowerCase('tr-TR');
-                        let orijinalIcerik = satir.innerText.toLocaleLowerCase('tr-TR');
-
                         let metinEslesti = metinFiltresi === '' || temizIcerik.includes(metinFiltresi);
-                        let tarihEslesti = tarihFiltresi === '' || orijinalIcerik.includes(tarihFiltresi);
+
+                        let tarihEslesti = true;
+
+                        if (basTarih || bitTarih) {
+                            tarihEslesti = false;
+                            let orijinalIcerik = satir.innerText;
+                            let eslesmeler = [...orijinalIcerik.matchAll(tarihRegex)];
+
+                            if (eslesmeler.length > 0) {
+                                let sonTarih = eslesmeler[eslesmeler.length - 1];
+                                let gun = parseInt(sonTarih[1], 10);
+                                let ay = parseInt(sonTarih[2], 10) - 1;
+                                let yil = parseInt(sonTarih[3], 10);
+                                let satirTarihi = new Date(yil, ay, gun);
+
+                                let basGec = !basTarih || satirTarihi >= basTarih;
+                                let bitGec = !bitTarih || satirTarihi <= bitTarih;
+
+                                if (basGec && bitGec) {
+                                    tarihEslesti = true;
+                                }
+                            }
+                        }
 
                         if (metinEslesti && tarihEslesti) {
                             satir.style.display = '';
@@ -362,12 +402,13 @@
                 }
 
                 if (aramaKutusu) aramaKutusu.addEventListener('keyup', filtreyiUygula);
-                if (tarihKutusu) tarihKutusu.addEventListener('input', filtreyiUygula);
+                if (basKutusu) basKutusu.addEventListener('input', filtreyiUygula);
+                if (bitKutusu) bitKutusu.addEventListener('input', filtreyiUygula);
             }
 
-            birlesikFiltrele('arama_demirbas', 'tarih_demirbas', '.cihaz-satiri');
-            birlesikFiltrele('gecmisArama', 'tarih_gecmis', '.gecmis-satiri');
-            birlesikFiltrele('sarfArama', 'tarih_sarf', '.sarf-satiri');
+            aralikliFiltrele('arama_demirbas', 'tarih_bas_demirbas', 'tarih_bit_demirbas', '.cihaz-satiri');
+            aralikliFiltrele('gecmisArama', 'tarih_bas_gecmis', 'tarih_bit_gecmis', '.gecmis-satiri');
+            aralikliFiltrele('sarfArama', 'tarih_bas_sarf', 'tarih_bit_sarf', '.sarf-satiri');
 
         });
     </script>

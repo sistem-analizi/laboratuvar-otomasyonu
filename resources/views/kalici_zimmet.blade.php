@@ -28,7 +28,7 @@
                             <h4 class="mb-0 text-white fw-bold"><i class="fa-solid fa-shield-halved me-2 opacity-75"></i> Kalıcı Demirbaş Ataması</h4>
                         </div>
                         <div class="card-body p-4 p-md-5">
-                            <form action="/kalici-zimmet-kaydet" method="POST">
+                            <form action="{{ url('kalici-zimmet-kaydet') }}" method="POST">
                                 @csrf
 
                                 <div class="p-4 mb-4 rounded-4" style="background-color: #fef2f2; border: 1px solid #fecaca;">

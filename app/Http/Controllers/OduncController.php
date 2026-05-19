@@ -167,12 +167,11 @@ class OduncController extends Controller
 
     public function gecikenler()
     {
+        // 1. GECİKENLER (Senin orijinal kodun - Teslim tarihi geçmiş olanlar)
         $gecikenler = \Illuminate\Support\Facades\DB::table('oduncler')
-            // Öğrenci bilgilerini getirmek için kullanicilar tablosunu bağlıyoruz
             ->join('kullanicilar', 'oduncler.kullanici_id', '=', 'kullanicilar.kullanici_id')
             ->leftJoin('demirbaslar', 'oduncler.demirbas_id', '=', 'demirbaslar.demirbas_id')
             ->leftJoin('urun_katalogu', 'demirbaslar.urun_id', '=', 'urun_katalogu.urun_id')
-            // İade edilmemiş ve tarihi bugünden eski olanlar
             ->whereNull('oduncler.gerceklesen_iade_tarihi')
             ->where('oduncler.planlanan_iade_tarihi', '<', now())
             ->select(
@@ -186,7 +185,27 @@ class OduncController extends Controller
             ->orderBy('oduncler.planlanan_iade_tarihi', 'asc')
             ->get();
 
-        return view('gecikenler', compact('gecikenler'));
+        // 2. YAKLAŞANLAR (Yeni Eklenen - Önümüzdeki 30 gün içinde teslim edilecekler)
+        $yaklasanlar = \Illuminate\Support\Facades\DB::table('oduncler')
+            ->join('kullanicilar', 'oduncler.kullanici_id', '=', 'kullanicilar.kullanici_id')
+            ->leftJoin('demirbaslar', 'oduncler.demirbas_id', '=', 'demirbaslar.demirbas_id')
+            ->leftJoin('urun_katalogu', 'demirbaslar.urun_id', '=', 'urun_katalogu.urun_id')
+            ->whereNull('oduncler.gerceklesen_iade_tarihi')
+            ->where('oduncler.planlanan_iade_tarihi', '>=', now()) // Bugünden sonraki
+            ->where('oduncler.planlanan_iade_tarihi', '<=', now()->addDays(30)) // Önümüzdeki 30 gün içinde
+            ->select(
+                'oduncler.*',
+                'urun_katalogu.urun_adi',
+                'demirbaslar.seri_no',
+                'kullanicilar.ad',
+                'kullanicilar.soyad',
+                'kullanicilar.okul_no'
+            )
+            ->orderBy('oduncler.planlanan_iade_tarihi', 'asc') // En yakın tarihli olan en üstte çıksın
+            ->get();
+
+        // Her iki listeyi de sayfaya gönderiyoruz
+        return view('gecikenler', compact('gecikenler', 'yaklasanlar'));
     }
 
 

@@ -31,7 +31,7 @@
                             <td class="fw-semibold text-primary">{{ $talep->urun_adi }}</td>
                             <td><i class="fa-regular fa-calendar text-muted me-2"></i> {{ $talep->istenen_kullanim_tarihi }}</td>
                             <td class="text-end">
-                                <form action="/talep-cevapla" method="POST" class="d-inline">
+                                <form action="{{ url('talep-cevapla') }}" method="POST" class="d-inline">
                                     @csrf
                                     <input type="hidden" name="talep_id" value="{{ $talep->talep_id }}">
 

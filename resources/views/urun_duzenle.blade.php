@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <form action="/urun-guncelle/{{ $urun->urun_id }}" method="POST" enctype="multipart/form-data" novalidate>
+            <form action="{{ url('urun-guncelle/' . $urun->urun_id) }}" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
 
                 <div class="mb-4">
@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="text-end pt-3 border-top">
-                    <a href="/" class="btn btn-light px-4 me-3 border fw-bold text-secondary">İptal Et</a>
+                    <a href="{{ url('/') }}" class="btn btn-light px-4 me-3 border fw-bold text-secondary">İptal Et</a>
                     <button type="submit" class="btn btn-warning-rich px-5 fw-bold py-2"><i class="fa-solid fa-save me-2"></i>Değişiklikleri Kaydet</button>
                 </div>
             </form>
