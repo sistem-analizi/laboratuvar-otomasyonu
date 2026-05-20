@@ -112,3 +112,8 @@ Route::get('/profil/duzenle', [App\Http\Controllers\KullaniciController::class, 
 Route::post('/profil/guncelle', [App\Http\Controllers\KullaniciController::class, 'profil_guncelle']);
 
 Route::get('/geciken-teslimatlar', [OduncController::class, 'gecikenler'])->name('odunc.gecikenler');
+
+Route::get('/temizle', function () {
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    return "Sunucu önbelleği, rotalar ve ayarlar başarıyla temizlendi!";
+});
