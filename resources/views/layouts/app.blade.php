@@ -215,7 +215,7 @@
             <div class="collapse navbar-collapse" id="anaMenu">
                 <ul class="navbar-nav me-xxl-auto mb-2 mb-xxl-0">
                     <li class="nav-item">
-                        <a class="nav-link lab-nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">
+                        <a class="nav-link lab-nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                             <i class="fa-solid fa-book-open"></i> Katalog
                         </a>
                     </li>

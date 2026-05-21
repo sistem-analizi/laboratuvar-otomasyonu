@@ -11,7 +11,7 @@ use App\Http\Controllers\AuthController;
 
 // 1. ANA SAYFA (KATALOG)
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 
 // 2. GİRİŞ, KAYIT VE ÇIKIŞ İŞLEMLERİ
