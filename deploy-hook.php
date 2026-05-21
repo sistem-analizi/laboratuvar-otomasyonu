@@ -159,6 +159,7 @@ $commands = [
     'route:cache'   => [],
     'view:cache'    => [],
     'event:cache'   => [],
+    'db:seed'   => [],
 ];
 
 $allOk = true;
