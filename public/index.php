@@ -1,14 +1,4 @@
 <?php
-// --- ZORUNLU CACHE TEMİZLEYİCİ BAŞLANGICI ---
-$cacheKlasoru = __DIR__ . '/../bootstrap/cache/';
-$dosyalar = glob($cacheKlasoru . '*.php');
-if ($dosyalar) {
-    foreach ($dosyalar as $dosya) {
-        @unlink($dosya);
-    }
-}
-// --- ZORUNLU CACHE TEMİZLEYİCİ BİTİŞİ ---
-
 
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;

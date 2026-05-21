@@ -13,14 +13,20 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $table = 'kullanicilar';
+
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'ad',
+        'soyad',
         'email',
+        'okul_no',
+        'rol_id',
         'password',
     ];
 
