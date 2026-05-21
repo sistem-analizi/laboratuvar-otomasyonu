@@ -15,24 +15,22 @@ class AuthController extends Controller
     // Giriş Yapma İşlemi (POST)
     public function giris_yap(Request $request) {
 
+        // 1. ADIM: Kullanıcıyı ŞİFRESİZ, sadece okul numarasına göre arıyoruz
         $kullanici = DB::table('kullanicilar')
             ->where('okul_no', $request->okul_no)
-            ->where('sifre', $request->sifre)
             ->first();
 
-        // Kullanıcı bulunduysa giriş yap
-        if ($kullanici) {
+        // 2. ADIM: Kullanıcı var mı VE girilen şifre veritabanındaki şifreli halini doğruluyor mu?
+        if ($kullanici && \Illuminate\Support\Facades\Hash::check($request->sifre, $kullanici->sifre)) {
 
-            // Hata veren Auth satırını tamamen sildik.
-            // Sadece senin kusursuz çalışan session mantığını kullanıyoruz.
-            // ... Session atama kısımları aynı kalıyor ...
+            // Giriş başarılı! Senin yazdığın kusursuz session mantığı aynen çalışıyor:
             session([
-                'kullanici_id' => $kullanici->kullanici_id,
+                'kullanici_id' => $kullanici->kullanici_id, // Eğer anahtar sütunun id ise 'id' yapabilirsin
                 'ad_soyad' => $kullanici->ad . ' ' . $kullanici->soyad,
                 'rol_id' => $kullanici->rol_id
             ]);
 
-            // DİKKAT: 1 numara Öğrenci ise direkt profile, değilse (2 veya 3 ise) ana sayfaya (Kataloğa) git
+            // Rol yönlendirmelerin de harika, aynen koruyoruz:
             if ($kullanici->rol_id == 1) {
                 return redirect('profil');
             } else {
@@ -40,6 +38,7 @@ class AuthController extends Controller
             }
 
         } else {
+            // Kullanıcı yoksa veya şifre hash kontrolünden geçemediyse:
             return back()->with('hata', 'Numara veya şifre hatalı. Lütfen tekrar deneyin.');
         }
     }
