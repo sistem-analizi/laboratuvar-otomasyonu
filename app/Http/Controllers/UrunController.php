@@ -163,26 +163,31 @@ class UrunController extends Controller
         try {
             // ========================================================
             // SENARYO 1: EĞER GELEN ÜRÜN DEMİRBAŞ İSE (tip_id == 1)
-            // (Senin yazdığın o kusursuz barkod döngüsü çalışır)
             // ========================================================
             if ($urun_bilgisi->tip_id == 1) {
 
                 $katalog_kodu = $urun_bilgisi->urun_kodu;
 
-                $son_cihaz = DB::table('demirbaslar')
+                // --- SQLITE VE MYSQL ORTAK UYUMLU KISIM (ÇÖZÜLDÜ) ---
+                $mevcut_cihazlar = DB::table('demirbaslar')
                     ->where('urun_id', $urun_id)
-                    ->orderByRaw("CAST(SUBSTRING_INDEX(seri_no, '-', -1) AS UNSIGNED) DESC")
-                    ->first();
+                    ->get();
 
                 $baslangic_no = 0;
-                if ($son_cihaz) {
-                    $parcalar = explode('-', $son_cihaz->seri_no);
-                    $baslangic_no = (int) end($parcalar);
+
+                foreach ($mevcut_cihazlar as $cihaz) {
+                    $parcalar = explode('-', $cihaz->seri_no);
+                    $sonKisim = (int) end($parcalar);
+
+                    if ($sonKisim > $baslangic_no) {
+                        $baslangic_no = $sonKisim;
+                    }
                 }
+                // ----------------------------------------------------
 
                 for($i = 0; $i < $eklenecek_adet; $i++) {
                     $siradaki_no = $baslangic_no + $i + 1;
-                    $barkod = $katalog_kodu . '-' . sprintf("%03d", $siradaki_no);
+                    $barkod = $katalog_kodu . '-' . sprintf("%03d", $siradaki_no); // Senin eklediğin 001, 002 formatı korundu!
 
                     $yeni_demirbas_id = DB::table('demirbaslar')->insertGetId([
                         'urun_id' => $urun_id,
@@ -207,7 +212,6 @@ class UrunController extends Controller
             }
             // ========================================================
             // SENARYO 2: EĞER GELEN ÜRÜN SARF MALZEMESİ İSE (tip_id == 2)
-            // (Barkod döngüsüne girmez, belirtilen konumdaki stoğu artırır)
             // ========================================================
             else if ($urun_bilgisi->tip_id == 2) {
 
