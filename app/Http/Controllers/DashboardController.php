@@ -49,7 +49,7 @@ class DashboardController extends Controller
         }
 
         // 5. Verileri getir ve sayfaya yolla
-        $urunler = $query->orderBy('u.urun_id', 'desc')->get();
+        $urunler = $query->orderBy('u.urun_adi', 'asc')->get();
 
         // ======= YENİ EKLENEN STOK HESAPLAMA KISMI =======
         foreach ($urunler as $urun) {
