@@ -168,9 +168,9 @@ class UrunController extends Controller
 
                 $katalog_kodu = $urun_bilgisi->urun_kodu;
 
-                // --- SQLITE VE MYSQL ORTAK UYUMLU KISIM (ÇÖZÜLDÜ) ---
+                // --- DÜZELTİLEN KISIM: ID yerine doğrudan barkod önekine göre arıyoruz ---
                 $mevcut_cihazlar = DB::table('demirbaslar')
-                    ->where('urun_id', $urun_id)
+                    ->where('seri_no', 'like', $katalog_kodu . '-%')
                     ->get();
 
                 $baslangic_no = 0;
@@ -245,6 +245,7 @@ class UrunController extends Controller
             return back()->withErrors('Kayıt sırasında bir hata oluştu: ' . $e->getMessage());
         }
     }
+
     // 3. DÜZENLEME VE SİLME İŞLEMLERİ
 
     public function duzenle_sayfasi($id) {

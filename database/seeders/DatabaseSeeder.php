@@ -235,7 +235,138 @@ class DatabaseSeeder extends Seeder
                 'dolap_konumu' => null,
                 'resim_yolu' => null,
                 'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'LDR Işık Sensörü Kartı',
+                'alt_kategori_id' => 7,
+                'teknik_detay' => 'Ortam ışığına göre direnci değişen, dijital ve analog çıkış verebilen foto-direnç modülü.',
+                'tip_id' => 1,
+                'urun_kodu' => '10101-026',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'LDR Işık Sensörü Kartı.jfif',
+                'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'Breadboard Güç Modülü',
+                'alt_kategori_id' => 15,
+                'teknik_detay' => '3.3V ve 5V çıkış verebilen, standart breadboardlar ile uyumlu regülatör kartı.',
+                'tip_id' => 1,
+                'urun_kodu' => '10101-013',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'Breadboard Güç Modülü.jfif',
+                'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'NodeMCU ESP8266 Geliştirme Kartı',
+                'alt_kategori_id' => 11,
+                'teknik_detay' => 'IoT projeleri için tasarlanmış, dahili Wi-Fi özellikli açık kaynaklı geliştirme kartı.',
+                'tip_id' => 1,
+                'urun_kodu' => '10101-032',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'NodeMCU ESP8266 Geliştirme Kartı.jfif',
+                'marka_id' => 2
+            ],
+            [
+                'urun_adi' => 'TCS34725 Renk Sensörü',
+                'alt_kategori_id' => 7,
+                'teknik_detay' => 'RGB renk değerlerini ve ortam ışığını algılayarak I2C üzerinden veri gönderen hassas modül.',
+                'tip_id' => 1,
+                'urun_kodu' => '10101-040',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'TCS34725 Renk Sensörü.jfif',
+                'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'Tüp Lehim Teli 1.2mm (Pastalı)',
+                'alt_kategori_id' => 9,
+                'teknik_detay' => 'İçerisindeki pasta (flux) sayesinde oksitlenmeyi önleyerek kolay lehimleme sağlayan 1.2mm kalınlığında tel.',
+                'tip_id' => 2,
+                'urun_kodu' => '10101-041',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'Tüp Lehim Teli 1.2mm (Pastalı).jfif',
+                'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'USB A-B Arduino Kablosu',
+                'alt_kategori_id' => 8,
+                'teknik_detay' => 'Arduino Uno ve Mega kartlarını bilgisayara bağlamak ve programlamak için kullanılan veri kablosu.',
+                'tip_id' => 2,
+                'urun_kodu' => '10101-042',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'USB A-B Arduino Kablosu.jfif',
+                'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'Raspberry Pi 4 Model B - 4GB',
+                'alt_kategori_id' => 1,
+                'teknik_detay' => 'Çift ekran desteği, 4GB RAM ve Gigabit Ethernet ile donatılmış yüksek performanslı tek kart bilgisayar.',
+                'tip_id' => 1,
+                'urun_kodu' => '10101-034',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'Raspberry Pi 4 Model B - 4GB.jfif',
+                'marka_id' => 9
+            ],
+            [
+                'urun_adi' => 'Siyah PETG Filament 1.75mm',
+                'alt_kategori_id' => 10,
+                'teknik_detay' => '3D yazıcılar için, PLA ve ABS\'nin avantajlarını birleştiren dayanıklı ve siyah renkli baskı malzemesi.',
+                'tip_id' => 2,
+                'urun_kodu' => '10101-038',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'Siyah PETG Filament 1.75mm.jfif',
+                'marka_id' => 4
+            ],
+            [
+                'urun_adi' => 'Sıcak Silikon Tabancası',
+                'alt_kategori_id' => 9,
+                'teknik_detay' => 'Katı silikon çubukları eriterek hızlı yapıştırma işlemleri sağlayan elektrikli alet.',
+                'tip_id' => 1,
+                'urun_kodu' => '10101-037',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'Sıcak Silikon Tabancası.jfif',
+                'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'Servo Uzatma Kablosu',
+                'alt_kategori_id' => 8,
+                'teknik_detay' => 'Servo motor kablolarının yetişmediği durumlar için kullanılan, 3 pinli standart uzatma bağlantısı.',
+                'tip_id' => 2,
+                'urun_kodu' => '10101-036',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'Servo Uzatma Kablosu.jfif',
+                'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'STM32F103C8T6 Blue Pill',
+                'alt_kategori_id' => 11,
+                'teknik_detay' => 'ARM Cortex-M3 çekirdekli, 32-bit mimariye sahip güçlü ve uygun fiyatlı geliştirme kartı.',
+                'tip_id' => 1,
+                'urun_kodu' => '10101-039',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'STM32F103C8T6 Blue Pill.jfif',
+                'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'Üçüncü El Lehimleme Aparatı',
+                'alt_kategori_id' => 9,
+                'teknik_detay' => 'Büyüteçli ve krokodil pensli tasarımıyla, lehimleme sırasında devre kartlarını sabit tutan yardımcı araç.',
+                'tip_id' => 1,
+                'urun_kodu' => '10101-043',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'Üçüncü El Lehimleme Aparatı.jfif',
+                'marka_id' => 7
+            ],
+            [
+                'urun_adi' => 'RGB LED Ortak Katot',
+                'alt_kategori_id' => 18,
+                'teknik_detay' => 'Çeşitli projeler için kullanılabilecek ortak katot yapısına sahip 5mm veya 3mm RGB LED bileşeni.',
+                'tip_id' => 2,
+                'urun_kodu' => '10101-035',
+                'dolap_konumu' => null,
+                'resim_yolu' => 'RGB LED Ortak Katot.jfif',
+                'marka_id' => 7
             ]
+
         ]);
     }
 }

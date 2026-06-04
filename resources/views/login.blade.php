@@ -134,6 +134,7 @@
 </head>
 <body>
 
+
 <div class="container d-flex justify-content-center">
     <div class="login-wrapper">
 
@@ -173,9 +174,9 @@
                     <div class="alert alert-success rounded-3 small border-0 bg-success bg-opacity-10 text-success fw-semibold"><i class="fa-solid fa-check-circle me-2"></i>{{ session('basari') }}</div>
                 @endif
 
-                <div class="form-floating mb-4 position-relative">
-                    <input type="text" name="okul_no" class="form-control" id="okul_no" placeholder="Okul Numarası" required autofocus>
-                    <label for="okul_no">Okul Numarası veya Sicil No</label>
+                <div class="mb-3">
+                    <label class="form-label text-white-50 small fw-bold">OKUL NO VEYA E-POSTA</label>
+                    <input type="text" name="giris_bilgisi" class="form-control" required placeholder="Örn: 123456789 veya ornek@ogr.comu.edu.tr">
                     <i class="fa-solid fa-id-card input-icon"></i>
                 </div>
 

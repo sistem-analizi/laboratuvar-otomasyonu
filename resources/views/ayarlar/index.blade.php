@@ -127,12 +127,12 @@
                                             <tr class="arama-satiri">
                                                 <td class="ps-4 align-middle fw-medium">{{ $ana->kategori_adi }}</td>
                                                 <td class="text-end pe-4 align-middle" style="width: 80px;">
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-icon-warning me-1 ana-kat-duzenle-btn"
-                                                            data-id="{{ $ana->kategori_id }}"
+                                                    <button type="button" class="btn btn-sm btn-icon-warning me-1 ana-kat-duzenle-btn"
+                                                            data-action="{{ url('ayarlar/ana-kategori-duzenle/' . $ana->kategori_id) }}"
                                                             data-ad="{{ $ana->kategori_adi }}" data-bs-toggle="modal"
-                                                            data-bs-target="#anaKatDuzenleModal" title="Düzenle"><i
-                                                            class="fa-solid fa-pen-to-square"></i></button>
+                                                            data-bs-target="#anaKatDuzenleModal" title="Düzenle">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
 
                                                     <form action="{{ url('ayarlar/ana-kategori-sil/' . $ana->kategori_id) }}"
                                                           method="POST" class="d-inline sil-formu">
@@ -206,13 +206,12 @@
                                                     </small>
                                                 </td>
                                                 <td class="text-end pe-4 align-middle" style="width: 80px;">
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-icon-warning me-1 alt-kat-duzenle-btn"
-                                                            data-id="{{ $alt->alt_kategori_id }}"
+                                                    <button type="button" class="btn btn-sm btn-icon-warning me-1 alt-kat-duzenle-btn"
+                                                            data-action="{{ url('ayarlar/alt-kategori-duzenle/' . $alt->alt_kategori_id) }}"
                                                             data-ust="{{ $alt->kategori_id }}"
                                                             data-ad="{{ $alt->alt_kategori_adi }}"
-                                                            data-bs-toggle="modal" data-bs-target="#altKatDuzenleModal"
-                                                            title="Düzenle"><i class="fa-solid fa-pen-to-square"></i>
+                                                            data-bs-toggle="modal" data-bs-target="#altKatDuzenleModal" title="Düzenle">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                     <form action="{{ url('ayarlar/alt-kategori-sil/' . $alt->alt_kategori_id) }}"
                                                           method="POST" class="d-inline sil-formu">
@@ -282,13 +281,13 @@
                                                 <td class="ps-4 align-middle fw-medium">{{ $konum->dolap_adi }}</td>
                                                 <td class="align-middle text-info">{{ $konum->raf_numarasi }}</td>
                                                 <td class="text-end pe-4 align-middle" style="width: 80px;">
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-icon-warning me-1 konum-duzenle-btn"
-                                                            data-id="{{ $konum->konum_id }}"
+                                                    <button type="button" class="btn btn-sm btn-icon-warning me-1 konum-duzenle-btn"
+                                                            data-action="{{ url('ayarlar/konum-duzenle/' . $konum->konum_id) }}"
                                                             data-dolap="{{ $konum->dolap_adi }}"
-                                                            data-raf="{{ $konum->raf_numarasi }}" data-bs-toggle="modal"
-                                                            data-bs-target="#konumDuzenleModal" title="Düzenle"><i
-                                                            class="fa-solid fa-pen-to-square"></i></button>
+                                                            data-raf="{{ $konum->raf_numarasi }}"
+                                                            data-bs-toggle="modal" data-bs-target="#konumDuzenleModal" title="Düzenle">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
                                                     <form action="{{ url('ayarlar/konum-sil/' . $konum->konum_id) }}"
                                                           method="POST" class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
@@ -336,12 +335,12 @@
                                             <tr class="arama-satiri">
                                                 <td class="ps-4 align-middle fw-medium">{{ $tip->tip_adi }}</td>
                                                 <td class="text-end pe-4 align-middle" style="width: 80px;">
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-icon-warning me-1 tedarik-tip-duzenle-btn"
-                                                            data-id="{{ $tip->id }}" data-ad="{{ $tip->tip_adi }}"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#tedarikTipDuzenleModal" title="Düzenle"><i
-                                                            class="fa-solid fa-pen-to-square"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-icon-warning me-1 tedarik-tip-duzenle-btn"
+                                                            data-action="{{ url('ayarlar/tedarik-tip-duzenle/' . $tip->id) }}"
+                                                            data-ad="{{ $tip->tip_adi }}"
+                                                            data-bs-toggle="modal" data-bs-target="#tedarikTipDuzenleModal" title="Düzenle">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
                                                     <form action="{{ url('ayarlar/tedarik-tip-sil/' . $tip->id) }}" method="POST"
                                                           class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
@@ -424,14 +423,12 @@
                                                 <td class="align-middle text-muted small">{{ $kaynak->iletisim_bilgisi ?? '-' }}</td>
                                                 <td class="text-end pe-4 align-middle" style="width: 100px;">
                                                     <!-- İŞTE BAHSETTİĞİN DÜZENLE BUTONU BURADA -->
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-icon-warning me-1 tedarikci-duzenle-btn"
-                                                            data-id="{{ $kaynak->tedarik_id }}"
+                                                    <button type="button" class="btn btn-sm btn-icon-warning me-1 tedarikci-duzenle-btn"
+                                                            data-action="{{ url('ayarlar/tedarikci-duzenle/' . $kaynak->tedarik_id) }}"
                                                             data-tip="{{ $kaynak->tedarik_tip_id }}"
                                                             data-isim="{{ $kaynak->kaynak_adi }}"
                                                             data-iletisim="{{ $kaynak->iletisim_bilgisi }}"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#tedarikciDuzenleModal" title="Düzenle">
+                                                            data-bs-toggle="modal" data-bs-target="#tedarikciDuzenleModal" title="Düzenle">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                     <!-- SİL FORMU -->
@@ -493,7 +490,12 @@
                                             <tr class="arama-satiri">
                                                 <td class="ps-4 align-middle fw-medium">{{ $t->tip_adi ?? 'Belirsiz' }}</td>
                                                 <td class="text-end pe-4 align-middle" style="width: 80px;">
-                                                    <button type="button" class="btn btn-sm btn-icon-warning me-1 urun-tip-duzenle-btn" data-id="{{ $t->tip_id }}" data-ad="{{ $t->tip_adi }}" data-bs-toggle="modal" data-bs-target="#urunTipDuzenleModal" title="Düzenle"><i class="fa-solid fa-pen-to-square"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-icon-warning me-1 urun-tip-duzenle-btn"
+                                                            data-action="{{ url('ayarlar/tip-duzenle/' . $t->tip_id) }}"
+                                                            data-ad="{{ $t->tip_adi }}"
+                                                            data-bs-toggle="modal" data-bs-target="#urunTipDuzenleModal" title="Düzenle">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
                                                     <form action="{{ url('ayarlar/tip-sil/'. $t->tip_id ?? $t->id) }}"
                                                           method="POST" class="d-inline sil-formu">
                                                         @csrf @method('DELETE')
@@ -595,15 +597,13 @@
                                                 </td>
                                                 <td class="text-end pe-4 align-middle" style="width: 80px;">
                                                     <!-- DÜZENLE BUTONU -->
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-icon-warning me-2 fatura-duzenle-btn"
-                                                            data-id="{{ $fatura->fatura_id }}"
+                                                    <button type="button" class="btn btn-sm btn-icon-warning me-2 fatura-duzenle-btn"
+                                                            data-action="{{ url('ayarlar/fatura-duzenle/' . $fatura->fatura_id) }}"
                                                             data-tedarik="{{ $fatura->tedarik_id }}"
                                                             data-firma="{{ $fatura->satici_firma }}"
                                                             data-tarih="{{ \Carbon\Carbon::parse($fatura->fatura_tarihi)->format('Y-m-d\TH:i:s') }}"
                                                             data-tutar="{{ $fatura->toplam_tutar }}"
-                                                            data-bs-toggle="modal" data-bs-target="#faturaDuzenleModal"
-                                                            title="Düzenle">
+                                                            data-bs-toggle="modal" data-bs-target="#faturaDuzenleModal" title="Düzenle">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                     <form action="{{ url('ayarlar/fatura-sil/' . $fatura->fatura_id) }}"
@@ -660,7 +660,8 @@
                                                 <td class="ps-4 align-middle fw-medium">{{ $marka->marka_adi }}</td>
                                                 <td class="text-end pe-4 align-middle" style="width: 100px;">
                                                     <button type="button" class="btn btn-sm btn-icon-warning me-1 marka-duzenle-btn"
-                                                            data-id="{{ $marka->marka_id }}" data-ad="{{ $marka->marka_adi }}"
+                                                            data-action="{{ url('ayarlar/marka-duzenle/' . $marka->marka_id) }}"
+                                                            data-ad="{{ $marka->marka_adi }}"
                                                             data-bs-toggle="modal" data-bs-target="#markaDuzenleModal" title="Düzenle">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
@@ -783,6 +784,7 @@
             </div>
         </div>
     </div>
+
     <!-- 1. Ana Kategori Modalı -->
     <div class="modal fade" id="anaKatDuzenleModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="background-color: #1e293b; border: 1px solid #334155; border-radius: 12px;"><div class="modal-header border-bottom border-secondary border-opacity-25 pb-3"><h5 class="modal-title text-white fw-bold"><i class="fa-solid fa-folder text-primary me-2"></i>Ana Kategori Düzenle</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
@@ -831,7 +833,7 @@
             </div></div>
     </div>
 
-    <style>
+        <style>
 
         .btn-icon-warning {
             background: transparent;
@@ -1028,18 +1030,18 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-
         // Marka Düzenleme
         document.querySelectorAll('.marka-duzenle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.getElementById('markaDuzenleForm').action = '/ayarlar/marka-duzenle/' + this.dataset.id;
+                document.getElementById('markaDuzenleForm').action = this.dataset.action;
                 document.getElementById('edit_marka_adi').value = this.dataset.ad;
             });
         });
+
         // 1. Ana Kategori Düzenleme
         document.querySelectorAll('.ana-kat-duzenle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.getElementById('anaKatDuzenleForm').action = '/ayarlar/ana-kategori-duzenle/' + this.dataset.id;
+                document.getElementById('anaKatDuzenleForm').action = this.dataset.action;
                 document.getElementById('edit_ana_kat_adi').value = this.dataset.ad;
             });
         });
@@ -1047,7 +1049,7 @@
         // 2. Alt Kategori Düzenleme
         document.querySelectorAll('.alt-kat-duzenle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.getElementById('altKatDuzenleForm').action = '/ayarlar/alt-kategori-duzenle/' + this.dataset.id;
+                document.getElementById('altKatDuzenleForm').action = this.dataset.action;
                 document.getElementById('edit_alt_ust_kat').value = this.dataset.ust;
                 document.getElementById('edit_alt_kat_adi').value = this.dataset.ad;
             });
@@ -1056,7 +1058,7 @@
         // 3. Konum Düzenleme
         document.querySelectorAll('.konum-duzenle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.getElementById('konumDuzenleForm').action = '/ayarlar/konum-duzenle/' + this.dataset.id;
+                document.getElementById('konumDuzenleForm').action = this.dataset.action;
                 document.getElementById('edit_konum_dolap').value = this.dataset.dolap;
                 document.getElementById('edit_konum_raf').value = this.dataset.raf;
             });
@@ -1065,7 +1067,7 @@
         // 4. Kaynak Tipi Düzenleme
         document.querySelectorAll('.tedarik-tip-duzenle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.getElementById('tedarikTipDuzenleForm').action = '/ayarlar/tedarik-tip-duzenle/' + this.dataset.id;
+                document.getElementById('tedarikTipDuzenleForm').action = this.dataset.action;
                 document.getElementById('edit_tedarik_tip_adi').value = this.dataset.ad;
             });
         });
@@ -1073,42 +1075,32 @@
         // 5. Ürün Tipi Düzenleme
         document.querySelectorAll('.urun-tip-duzenle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.getElementById('urunTipDuzenleForm').action = '/ayarlar/tip-duzenle/' + this.dataset.id;
+                document.getElementById('urunTipDuzenleForm').action = this.dataset.action;
                 document.getElementById('edit_urun_tip_adi').value = this.dataset.ad;
             });
         });
 
-        // Tedarikçi Kurum Düzenleme Butonlarına Tıklanınca Verileri Doldur
+        // Tedarikçi Kurum Düzenleme
         document.querySelectorAll('.tedarikci-duzenle-btn').forEach(button => {
             button.addEventListener('click', function () {
-                // Formun gideceği adresi (action) ayarla
-                document.getElementById('tedarikciDuzenleForm').action = '/ayarlar/tedarikci-duzenle/' + this.getAttribute('data-id');
-
-                // Inputların içini doldur
-                document.getElementById('edit_kaynak_adi').value = this.getAttribute('data-isim');
-                document.getElementById('edit_tedarik_tip_id').value = this.getAttribute('data-tip');
-                document.getElementById('edit_iletisim_bilgisi').value = this.getAttribute('data-iletisim');
+                document.getElementById('tedarikciDuzenleForm').action = this.dataset.action;
+                document.getElementById('edit_kaynak_adi').value = this.dataset.isim;
+                document.getElementById('edit_tedarik_tip_id').value = this.dataset.tip;
+                document.getElementById('edit_iletisim_bilgisi').value = this.dataset.iletisim;
             });
         });
 
-        // Fatura Düzenleme Butonlarına Tıklanınca Verileri Modala Doldur
+        // Fatura Düzenleme
         document.querySelectorAll('.fatura-duzenle-btn').forEach(button => {
             button.addEventListener('click', function () {
-                // Butondaki gizli verileri al
-                let id = this.getAttribute('data-id');
-                let tedarik = this.getAttribute('data-tedarik');
-                let firma = this.getAttribute('data-firma');
-                let tarih = this.getAttribute('data-tarih');
-                let tutar = this.getAttribute('data-tutar');
-
-                // Modal içindeki form elemanlarına yerleştir
-                document.getElementById('faturaDuzenleForm').action = '/ayarlar/fatura-duzenle/' + id;
-                document.getElementById('edit_tedarik_id').value = tedarik;
-                document.getElementById('edit_satici_firma').value = firma;
-                document.getElementById('edit_fatura_tarihi').value = tarih;
-                document.getElementById('edit_toplam_tutar').value = tutar;
+                document.getElementById('faturaDuzenleForm').action = this.dataset.action;
+                document.getElementById('edit_tedarik_id').value = this.dataset.tedarik;
+                document.getElementById('edit_satici_firma').value = this.dataset.firma;
+                document.getElementById('edit_fatura_tarihi').value = this.dataset.tarih;
+                document.getElementById('edit_toplam_tutar').value = this.dataset.tutar;
             });
         });
+
 
         document.addEventListener("DOMContentLoaded", function () {
 

@@ -242,12 +242,15 @@
 
         public function alt_kategori_duzenle(Request $request, $id) {
             try {
-                DB::table('alt_kategoriler')->where('alt_kategori_id', $id)->update([
+                // BURASI KRİTİK: Tablo adını veritabanındaki gibi 'alt_kategori' yaptık
+                DB::table('alt_kategori')->where('alt_kategori_id', $id)->update([
                     'kategori_id' => $request->kategori_id,
                     'alt_kategori_adi' => $request->alt_kategori_adi
                 ]);
-                return back()->with('basari', 'Alt kategori güncellendi.');
-            } catch (\Exception $e) { return back()->with('hata', 'Hata: ' . $e->getMessage()); }
+                return back()->with('basari', 'Alt kategori başarıyla güncellendi.');
+            } catch (\Exception $e) {
+                return back()->with('hata', 'Hata: ' . $e->getMessage());
+            }
         }
 
         public function konum_duzenle(Request $request, $id) {
